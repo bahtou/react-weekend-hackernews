@@ -3,9 +3,13 @@ import React, { useState, useEffect } from 'react';
 import Domain from './Domain';
 
 async function fetchStory(articleId) {
-  const response = await fetch(`https://hacker-news.firebaseio.com/v0/item/${articleId}.json?print=pretty`, { method: 'GET', mode: 'cors' });
-  const results = await response.json();
-  return results;
+  try {
+    const response = await fetch(`https://hacker-news.firebaseio.com/v0/item/${articleId}.json?print=pretty`, { method: 'GET', mode: 'cors' }); 
+    const results = await response.json();
+    return results;
+  } catch(error) {
+    return {error}
+  }
 }
 
 async function fetchStories() {
