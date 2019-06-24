@@ -39,44 +39,42 @@ const getTopDomainsFromStories = (stories) => {
 }
 
 async function fetchTopDomains() {
-  let isLoading = true
-  let isError = false
-  let domains = []
   const _stories = await fetchStories();
 
   if(_stories.error) {
-    return {isLoading: false, isError: true, domains: []}
+    return {isError: true, domains: []}
   }
 
   const storyIds = _stories.slice();
   const storyPromises = storyIds.map(async storyId => await fetchStory(storyId));
   const stories = await Promise.all(storyPromises);
   if(stories.some(story => story.error)) {
-    isError = true;
-  } else {
-    domains = getTopDomainsFromStories(stories)
-  }
-  return {isLoading, isError, domains}
+    return {isError: true, domains: []}
+  } 
+  const domains = getTopDomainsFromStories(stories)
+  return {isError: false, domains}
 }
 
 const useFetchTopDomains = () => {
   const [ domains, setDomains ] = useState([]);
   const [ isLoading, setIsLoading] = useState(true)
+  const [isError, setIsError] = useState(false)
   useEffect(() => {
     const fetchData = async () => {
       const results = await fetchTopDomains();
       setDomains(results.domains);
       setIsLoading(false)
+      setIsError(results.isError)
     };
 
     fetchData();
   }, []);
 
-  return {isLoading, domains}
+  return {isLoading, isError, domains}
 };
 
 function TopDomains() {
-  const {isLoading, domains} = useFetchTopDomains();
+  const {isLoading, isError, domains} = useFetchTopDomains();
 
   return  isError
   ? (<div style={{color: 'red'}}>Something went wrong...</div>)
