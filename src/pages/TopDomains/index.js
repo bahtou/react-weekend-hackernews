@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import './styles.css';
 import Domain from './Domain';
 
 async function fetchStory(articleId) {
@@ -89,12 +89,14 @@ function TopDomains() {
     <table>
       <tbody>
         <tr>
+          <th></th>
           <th>Domain</th>
           <th>Score</th>
           <th># Posts</th>
         </tr>
       { domains.map((domain, index) => (
         <tr key={ domain.url}>
+            <td>{index + 1}. </td>
             <td>{domain.url}</td>
             <td>{domain.score}</td>  
             <td>{domain.numPosts}</td>
