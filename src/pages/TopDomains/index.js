@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './styles.css';
+import styles from './styles.css';
 import Domain from './Domain';
 
 async function fetchStory(articleId) {
@@ -86,20 +86,20 @@ function TopDomains() {
   : (isLoading
   ? <div>...Loading...</div>
   : (
-    <table>
+    <table className={styles.table}>
       <tbody>
-        <tr>
-          <th></th>
-          <th>Domain</th>
-          <th>Score</th>
-          <th># Posts</th>
+        <tr className={styles.tr}>
+          <th className={styles.th}></th>
+          <th className={styles.th}>Domain</th>
+          <th className={styles.th}>Score</th>
+          <th className={styles.th}># Posts</th>
         </tr>
       { domains.map((domain, index) => (
-        <tr key={ domain.url}>
-            <td>{index + 1}. </td>
-            <td>{domain.url}</td>
-            <td>{domain.score}</td>  
-            <td>{domain.numPosts}</td>
+        <tr key={ domain.url} className={styles.tr}>
+            <td className={styles.td}>{index + 1}. </td>
+            <td className={styles.td}>{domain.url}</td>
+            <td className={styles.td}>{domain.score}</td>  
+            <td className={styles.td}>{domain.numPosts}</td>
         </tr> ))}
       </tbody>
     </table>
