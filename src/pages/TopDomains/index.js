@@ -50,7 +50,7 @@ async function fetchTopDomains() {
     return {isError: true, domains: []}
   }
 
-  const storyIds = _stories.slice();
+  const storyIds = _stories.slice(0,100);
   const storyPromises = storyIds.map(async storyId => await fetchStory(storyId));
   const stories = await Promise.all(storyPromises);
   if(stories.some(story => story.error)) {
