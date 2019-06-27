@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import { distanceInWordsToNow } from 'date-fns';
-import styles from './styles.css'
+import styles from './styles.css';
 
 const dataFetchReducer = (state, action) => {
   switch (action.type) {
@@ -67,21 +67,23 @@ function Search() {
     { hits: [] }
   );
 
+  const { stories, listTop, searchTitle, searchInput, searchButton } = styles;
+
   return (
     <>
       {isError && <div>Something went wrong ...</div>}
 
       {isLoading
         ? (<div>Loading ...</div>)
-        : (<ul className={styles.stories}>
-            <li className={ styles.listTop }>
-              <h2 className={ styles.searchTitle }>Search Hackner News</h2>
+        : (<ul className={stories }>
+            <li className={ listTop }>
+              <h2 className={ searchTitle }>Search Hackner News</h2>
               <input
-                className={ styles.searchInput }
+                className={ searchInput }
                 type="text"
                 value={ query }
                 onChange={ event => setQuery(event.target.value) } />
-              <button className={ styles.searchButton } type="button" onClick={ () => doFetch(`http://hn.algolia.com/api/v1/search?query=${query}`) }>
+              <button className={ searchButton } type="button" onClick={ () => doFetch(`http://hn.algolia.com/api/v1/search?query=${query}`) }>
                 Search
               </button>
             </li>
