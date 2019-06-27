@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useReducer } from 'react';
-import moment from 'moment';
+import { distanceInWordsToNow } from 'date-fns';
 import styles from './styles.css'
 
 const dataFetchReducer = (state, action) => {
@@ -42,7 +42,6 @@ const useDataAPI = (initUrl, initData) => {
       try {
         const response = await fetch(url, { method: 'GET', mode: 'cors' });
         const results = await response.json();
-        console.log(results)
         // setData({ hits: results.hits });
         dispatch({ type: 'FETCH_SUCCESS', payload: results.hits });
       } catch (err) {
@@ -88,10 +87,10 @@ function Search() {
             </li>
           {data.hits.map(item => {
             
-            const url = new URL (item.url)
-            const timeAgo = moment(item.created_at).fromNow()
-            const userLink = `https://news.ycombinator.com/user?id=${item.author}`
-            const commentLink = `https://news.ycombinator.com/item?id=${item.objectID}`
+            const url = new URL (item.url);
+            const timeAgo = distanceInWordsToNow(item.created_at, { addSuffix: true });
+            const userLink = `https://news.ycombinator.com/user?id=${item.author}`;
+            const commentLink = `https://news.ycombinator.com/item?id=${item.objectID}`;
            
             return (
               <li key={ item.objectID } className={ styles.story }>
