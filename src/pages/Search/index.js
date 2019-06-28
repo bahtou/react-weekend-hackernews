@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useReducer } from 'react';
-import { distanceInWordsToNow } from 'date-fns';
-import styles from './styles.css';
+import SearchBar from './SearchBar';
+import SearchList from './SearchList';
+
 
 const dataFetchReducer = (state, action) => {
   switch (action.type) {
@@ -61,55 +62,21 @@ const useDataAPI = (initUrl, initData) => {
 };
 
 function Search() {
-  const [query, setQuery] = useState('redux');
   const { data, isLoading, isError, doFetch } = useDataAPI(
     'http://hn.algolia.com/api/v1/search?query=redux',
     { hits: [] }
   );
 
-  const { stories, listTop, searchTitle, searchInput, searchButton } = styles;
-
   return (
     <>
-      {isError && <div>Something went wrong ...</div>}
+      <SearchBar doFetch={doFetch} />
 
       {isLoading
         ? (<div>Loading ...</div>)
-        : (<ul className={stories }>
-            <li className={ listTop }>
-              <h2 className={ searchTitle }>Search Hackner News</h2>
-              <input
-                className={ searchInput }
-                type="text"
-                value={ query }
-                onChange={ event => setQuery(event.target.value) } />
-              <button className={ searchButton } type="button" onClick={ () => doFetch(`http://hn.algolia.com/api/v1/search?query=${query}`) }>
-                Search
-              </button>
-            </li>
-          {data.hits.map(item => {
-            
-            const url = new URL (item.url);
-            const timeAgo = distanceInWordsToNow(item.created_at, { addSuffix: true });
-            const userLink = `https://news.ycombinator.com/user?id=${item.author}`;
-            const commentLink = `https://news.ycombinator.com/item?id=${item.objectID}`;
-           
-            return (
-              <li key={ item.objectID } className={ styles.story }>
-                <div>
-                  <a className={styles.title} href={ item.url }>{ item.title } </a>
-                </div>
-                <div>
-                  <span> { item.points } points </span>
-                  <span> | <a href={ userLink }>{ item.author }</a> </span>
-                  <span> | { timeAgo } </span>
-                  <span> | <a href={ commentLink }>{ item.num_comments } comments</a> </span>
-                  <span> | <a href={ 'http://' + url.hostname }>{ url.hostname }</a> </span>
-                </div>  
-              </li>
-            )
-          })}
-        </ul>)
+        : (isError
+          ? <div>Something went wrong ...</div>
+          : <SearchList data={data} />
+        )
       }
     </>
   );
