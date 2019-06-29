@@ -13,7 +13,7 @@ function SearchBar({ doFetch }) {
         type="text"
         value={ query }
         onChange={ event => setQuery(event.target.value) } />
-      <button className={ searchButton } type="button" onClick={ () => doFetch(`http://hn.algolia.com/api/v1/search?query=${query}`) }>
+      <button className={ searchButton } type="button" onClick={ () => doFetch(query) }>
         Search
       </button>
     </header>

@@ -1,4 +1,8 @@
 import React, { useState, useEffect, useReducer } from 'react';
+
+import hnEndpoint, {
+  SEARCH
+} from 'Endpoints';
 import SearchBar from './SearchBar';
 import SearchList from './SearchList';
 
@@ -26,8 +30,8 @@ const dataFetchReducer = (state, action) => {
   }
 };
 
-const useDataAPI = (initUrl, initData) => {
-  const [url, setUrl] = useState(initUrl);
+const useDataAPI = (initQuery, initData) => {
+  const [query, setQuery] = useState(initQuery);
   const [state, dispatch] = useReducer(dataFetchReducer, {
     isLoading: false,
     isError: false,
@@ -36,34 +40,25 @@ const useDataAPI = (initUrl, initData) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      // setIsError(false);
-      // setIsLoading(true);
       dispatch({ type: 'FETCH_INIT' });
 
-      try {
-        const response = await fetch(url, { method: 'GET', mode: 'cors' });
-        const results = await response.json();
-        // setData({ hits: results.hits });
-        dispatch({ type: 'FETCH_SUCCESS', payload: results.hits });
-      } catch (err) {
-        // setIsError(true);
-        dispatch({ type: 'FETCH_FAILURE' });
-      }
+      const results = await hnEndpoint(SEARCH, query);
+      if (results.error) return dispatch({ type: 'FETCH_FAILURE' });
 
-      // setIsLoading(false);
+      dispatch({ type: 'FETCH_SUCCESS', payload: results.hits });
     };
 
     fetchData();
-  }, [url]);
+  }, [query]);
 
-  const doFetch = url => setUrl(url);
+  const doFetch = query => setQuery(query);
 
   return { ...state, doFetch };
 };
 
 function Search() {
   const { data, isLoading, isError, doFetch } = useDataAPI(
-    'http://hn.algolia.com/api/v1/search?query=redux',
+    'redux',
     { hits: [] }
   );
 
