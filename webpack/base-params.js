@@ -58,6 +58,7 @@ module.exports = {
     'react-dom': '@hot-loader/react-dom',
     Components: path.resolve(__dirname, '..', `${appRoot}/components`),
     Elements: path.resolve(__dirname, '..', `${appRoot}/elements`),
+    Endpoints: path.resolve(__dirname, '..', `${appRoot}/endpoints`),
     Events: path.resolve(__dirname, '..', `${appRoot}/events`),
     Fonts: path.resolve(__dirname, '..', `${appRoot}/assets/fonts`),
     Gateway: path.resolve(__dirname, '..', `${appRoot}/gateway`),
