@@ -1,50 +1,16 @@
 import { useEffect, useReducer } from 'react';
 
-import useHNtopStories from './useHNtopStories';
-import getTopDomainsFromStories from './getTopDomainsFromStories';
-
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'FETCH_INIT':
-      return { ...state,
-        isLoading: true,
-        isError: false
-      };
-    case 'FETCH_SUCCESS':
-      return { ...state,
-        isLoading: false,
-        isError: false,
-        domains: action.payload
-      };
-    case 'FETCH_FAILURE':
-      return { ...state,
-        isLoading: false,
-        isError: true
-      };
-    default:
-      return state;
-  }
-};
+import useHNStories from './useHNStories';
+import getTopDomainsFromStories from '../utils/getTopDomainsFromStories';
+import { BEST_STORIES } from '../endpoints';
 
 const useHNtopDomains = () => {
-  const { isLoading:initLoading, isError:initError, stories } = useHNtopStories(100);
-  const [state, dispatch] = useReducer(reducer, {
-    isLoading: true,
-    isError: false,
-    domains: []
-  });
-
-  useEffect(() => {
-    const _domains = getTopDomainsFromStories(stories);
-
-    dispatch({ type: 'FETCH_SUCCESS', payload: _domains });
-  }, [stories]);
+  const { isLoading, isError, stories } = useHNStories(BEST_STORIES, 100);
 
   return {
-    isLoading: initLoading || state.isLoading,
-    isError: initError || state.isError,
-    domains: state.domains
+    isLoading: isLoading,
+    isError: isError,
+    domains: getTopDomainsFromStories(stories)
   };
 };
 

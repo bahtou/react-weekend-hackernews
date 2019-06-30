@@ -7,11 +7,6 @@ import hnEndpoint, {
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'FETCH_INIT':
-      return { ...state,
-        isLoading: true,
-        isError: false
-      };
     case 'FETCH_SUCCESS':
       return { ...state,
         isLoading: false,
@@ -28,7 +23,7 @@ const reducer = (state, action) => {
   }
 };
 
-const useHNtopStories = limit => {
+const useHNStories = (endpoint, limit) => {
   const [state, dispatch] = useReducer(reducer, {
     isLoading: true,
     isError: false,
@@ -37,11 +32,21 @@ const useHNtopStories = limit => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const storyIds = await hnEndpoint(TOP_STORIES);
+      const storyIds = await hnEndpoint(endpoint);
+      if (storyIds.error) {
+        dispatch({ type: 'FETCH_FAILURE' })
+        return
+      }
+
       const limitedStoryIds = storyIds.slice(0, limit);
 
       const promises = limitedStoryIds.map(async storyId => await hnEndpoint(STORY, storyId));
       const results = await Promise.all(promises);
+      if (results.some(result => result.error)) {
+        dispatch({ type: 'FETCH_FAILURE' })
+        return
+      }
+
 
       dispatch({ type: 'FETCH_SUCCESS', payload: results });
     };
@@ -53,4 +58,4 @@ const useHNtopStories = limit => {
 };
 
 
-export default useHNtopStories;
+export default useHNStories;
