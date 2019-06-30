@@ -17,7 +17,7 @@ function SearchBar({ performSearch }) {
         type="text"
         value={searchTerm}
         onChange={evt => setSearchTerm(evt.target.value)} />
-      <button className={ searchButton } type="button" onClick={performSearch(searchTerm)}>
+      <button className={ searchButton } type="button" onClick={() => performSearch(searchTerm)}>
         Search
       </button>
     </header>
