@@ -7,7 +7,7 @@ import { story, stories, title } from './styles.css';
 function SearchList({ data }) {
   return (
     <ul className={stories}>
-      {data.hits.map(item => {
+      {data.map(item => {
         const url = new URL(item.url);
         const timeAgo = distanceInWordsToNow(item.created_at, { addSuffix: true });
         const userLink = `https://news.ycombinator.com/user?id=${item.author}`;
@@ -26,7 +26,7 @@ function SearchList({ data }) {
               <span> | <a href={ 'http://' + url.hostname }>{ url.hostname }</a> </span>
             </div>
           </li>
-        )
+        );
       })}
     </ul>
   );

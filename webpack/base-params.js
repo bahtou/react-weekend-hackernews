@@ -62,6 +62,7 @@ module.exports = {
     Events: path.resolve(__dirname, '..', `${appRoot}/events`),
     Fonts: path.resolve(__dirname, '..', `${appRoot}/assets/fonts`),
     Gateway: path.resolve(__dirname, '..', `${appRoot}/gateway`),
+    Hooks: path.resolve(__dirname, '..', `${appRoot}/hooks`),
     Images: path.resolve(__dirname, '..', `${appRoot}/assets/images`),
     Lib: path.resolve(__dirname, '..', `${appRoot}/lib`),
     PipeRouter: path.resolve(__dirname, '..', `${appRoot}/piperouter`),

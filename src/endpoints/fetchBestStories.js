@@ -3,7 +3,7 @@ const options = {
   mode: 'cors'
 };
 
-async function fetchBestStories(articleId) {
+async function fetchBestStories() {
   const url = `http://hacker-news.firebaseio.com/v0/beststories.json`;
 
   try {
