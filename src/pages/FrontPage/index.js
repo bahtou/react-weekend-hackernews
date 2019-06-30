@@ -1,8 +1,9 @@
 import React from 'react';
 
-import { useHNStories } from 'Hooks';
 import Story from './Story';
-import { TOP_STORIES } from '../../endpoints';
+import { useHNStories } from 'Hooks';
+import { TOP_STORIES } from 'Endpoints';
+
 
 function TopStories() {
   const { isLoading, isError, stories } = useHNStories(TOP_STORIES, 10);

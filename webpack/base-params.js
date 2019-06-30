@@ -71,7 +71,8 @@ module.exports = {
     Services: path.resolve(__dirname, '..', `${appRoot}/services`),
     Shared: path.resolve(__dirname, '..', `${appRoot}/components/shared`),
     Store: path.resolve(__dirname, '..', `${appRoot}/configureStore.js`),
-    Styles: path.resolve(__dirname, '..', `${appRoot}/assets/styles`)
+    Styles: path.resolve(__dirname, '..', `${appRoot}/assets/styles`),
+    Utils: path.resolve(__dirname, '..', `${appRoot}/utils`)
   },
   resolveAliasModules: [
     path.resolve(__dirname, '..', appRoot),

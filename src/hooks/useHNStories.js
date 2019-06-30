@@ -1,7 +1,6 @@
 import { useEffect, useReducer } from 'react';
 import hnEndpoint, {
-  STORY,
-  TOP_STORIES
+  STORY
 } from 'Endpoints';
 
 
@@ -23,7 +22,7 @@ const reducer = (state, action) => {
   }
 };
 
-const useHNStories = (endpoint, limit) => {
+const useHNStories = (storyCategory, limit=100) => {
   const [state, dispatch] = useReducer(reducer, {
     isLoading: true,
     isError: false,
@@ -32,21 +31,17 @@ const useHNStories = (endpoint, limit) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const storyIds = await hnEndpoint(endpoint);
-      if (storyIds.error) {
-        dispatch({ type: 'FETCH_FAILURE' })
-        return
-      }
+      const storyIds = await hnEndpoint(storyCategory);
+      if (storyIds.error) return dispatch({ type: 'FETCH_FAILURE' });
 
       const limitedStoryIds = storyIds.slice(0, limit);
-
       const promises = limitedStoryIds.map(async storyId => await hnEndpoint(STORY, storyId));
       const results = await Promise.all(promises);
-      if (results.some(result => result.error)) {
-        dispatch({ type: 'FETCH_FAILURE' })
-        return
-      }
 
+      if (results.some(result => result.error)) {
+        dispatch({ type: 'FETCH_FAILURE' });
+        return;
+      }
 
       dispatch({ type: 'FETCH_SUCCESS', payload: results });
     };

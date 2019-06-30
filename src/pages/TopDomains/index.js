@@ -3,11 +3,15 @@ import React from 'react';
 import { table } from './styles.css';
 import DomainHeader from './DomainHeader';
 import DomainList from './DomainList';
-import { useHNtopDomains } from 'Hooks';
+
+import { getTopDomainsFromStories } from 'Utils';
+import { useHNStories } from 'Hooks';
+import { BEST_STORIES } from 'Endpoints';
 
 
 function TopDomains() {
-  const { isLoading, isError, domains } = useHNtopDomains();
+  const { isLoading, isError, stories } = useHNStories(BEST_STORIES, 100);
+  const domains = getTopDomainsFromStories(stories);
 
   return isError
     ? (<div style={{ color: 'red' }}>Something went wrong...</div>)
