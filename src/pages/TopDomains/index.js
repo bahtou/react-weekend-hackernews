@@ -16,7 +16,7 @@ import { header, actionButtons } from './styles.scss';
 
 function TopDomains() {
   const numStories = 100;
-  const { stories } = useHNstories(BEST_STORIES, numStories);
+  const { stories } = useHNstories(TOP_STORIES, numStories);
   const domains = getTopDomainsFromStories(stories);
 
   return (

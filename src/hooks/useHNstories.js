@@ -1,7 +1,11 @@
 import { useEffect, useReducer } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import hnEndpoint, {
   STORY
 } from 'Endpoints';
+import { setBestStories } from 'Reducers/bestStories';
+import { setTopStories } from 'Reducers/topStories';
 
 
 const reducer = (state, action) => {
@@ -10,12 +14,10 @@ const reducer = (state, action) => {
       return {
         ...state,
         isLoading: false,
-        isError: false,
-        stories: action.payload
+        isError: false
       };
     case 'FETCH_FAILURE':
       return {
-        ...state,
         isLoading: false,
         isError: true
       };
@@ -24,8 +26,16 @@ const reducer = (state, action) => {
   }
 };
 
+const setDispatch = {
+  BEST_STORIES: setBestStories,
+  TOP_STORIES: setTopStories
+};
+
 const defaultNumStories = 100;
 const useHNstories = (storyCategory, limit = defaultNumStories) => {
+  const storyDescription = storyCategory.description;
+  const stories = useSelector(state => state[storyDescription]);
+  const reDispatch = useDispatch();
   const [state, dispatch] = useReducer(reducer, {
     isLoading: true,
     isError: false,
@@ -44,13 +54,16 @@ const useHNstories = (storyCategory, limit = defaultNumStories) => {
       const someErrors = results.some(result => result.error);
       if (someErrors) return dispatch({ type: 'FETCH_FAILURE' });
 
+      reDispatch(setDispatch[storyDescription](results));
       return dispatch({ type: 'FETCH_SUCCESS', payload: results });
     };
 
-    fetchData();
-  }, [limit, storyCategory]);
+    if (stories && stories.length === 0) {
+      fetchData();
+    }
+  }, [stories]);
 
-  return { ...state };
+  return { stories };
 };
 
 

@@ -16,8 +16,8 @@
   },
 
   "rules": {
-    "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
-    "react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
+    "react-hooks/rules-of-hooks": 2, // Checks rules of Hooks
+    "react-hooks/exhaustive-deps": 0, // Checks effect dependencies
 
     "react/jsx-closing-bracket-location": [2, "after-props"],
     "react/jsx-curly-spacing": [2, "never", {"spacing": { "allowMultiline": false, "objectLiterals": "never" }}],

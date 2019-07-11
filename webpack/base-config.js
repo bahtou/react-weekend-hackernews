@@ -1,11 +1,11 @@
 const webpack = require('webpack');
 
+const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const {
   appEntry, contextPath, fontPathEntry,
   imagePathEntry, jsPaths, outputPath,
   resolveAliasPaths, resolveAliasModules
 } = require('./base-params');
-const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 
 
 module.exports = {
