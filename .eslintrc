@@ -34,6 +34,25 @@
     "react/jsx-uses-vars": 2,
     "react/require-render-return": 0,
     "react/jsx-wrap-multilines": [2, { "declaration": true, "assignment": true, "return": true }],
-    "react/jsx-no-bind": [0, { "ignoreRefs": false, "allowArrowFunctions": false, "allowBind": false }]
+    "react/jsx-no-bind": [0, { "ignoreRefs": false, "allowArrowFunctions": false, "allowBind": false }],
+
+    "max-statements": [2, { "max": 13 }],
+    "no-underscore-dangle": 0,
+    "no-restricted-syntax": [
+      2,
+      {
+        "selector": "ForInStatement",
+        "message": "for..in loops iterate over the entire prototype chain, which is virtually never what you want. Use Object.{keys,values,entries}, and iterate over the resulting array."
+      },
+      {
+        "selector": "LabeledStatement",
+        "message": "Labels are a form of GOTO; using them makes code confusing and hard to maintain and understand."
+      },
+      {
+        "selector": "WithStatement",
+        "message": "`with` is disallowed in strict mode because it makes code impossible to predict and optimize."
+      }
+    ],
+    "no-continue": 0,
   }
 }

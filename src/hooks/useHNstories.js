@@ -33,8 +33,7 @@ const setDispatch = {
 
 const defaultNumStories = 100;
 const useHNstories = (storyCategory, limit = defaultNumStories) => {
-  const storyDescription = storyCategory.description;
-  const stories = useSelector(state => state[storyDescription]);
+  const stories = useSelector(state => state[storyCategory]);
   const reDispatch = useDispatch();
   const [state, dispatch] = useReducer(reducer, {
     isLoading: true,
@@ -45,22 +44,20 @@ const useHNstories = (storyCategory, limit = defaultNumStories) => {
   useEffect(() => {
     const fetchData = async () => {
       const storyIds = await hnEndpoint(storyCategory);
-      if (storyIds.error) return dispatch({ type: 'FETCH_FAILURE' });
+      // if (storyIds.error) return dispatch({ type: 'FETCH_FAILURE' });
 
       const limitedStoryIds = storyIds.slice(0, limit);
       const promises = limitedStoryIds.map(storyId => hnEndpoint(STORY, storyId));
       const results = await Promise.all(promises);
 
-      const someErrors = results.some(result => result.error);
-      if (someErrors) return dispatch({ type: 'FETCH_FAILURE' });
+      // const someErrors = results.some(result => result.error);
+      // if (someErrors) return dispatch({ type: 'FETCH_FAILURE' });
 
-      reDispatch(setDispatch[storyDescription](results));
+      reDispatch(setDispatch[storyCategory](results));
       return dispatch({ type: 'FETCH_SUCCESS', payload: results });
     };
 
-    if (stories && stories.length === 0) {
-      fetchData();
-    }
+    if (stories && stories.length === 0) fetchData();
   }, [stories]);
 
   return { stories };
