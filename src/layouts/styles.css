@@ -14,7 +14,7 @@
   grid-row: 2;
 }
 
- .contentGrid {
+.contentGrid {
   grid-column: main;
   grid-row: content;
   padding-bottom: 3.0em;
