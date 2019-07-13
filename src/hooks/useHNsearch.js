@@ -1,8 +1,12 @@
 import { useState, useEffect, useReducer } from 'react';
-import hnEndpoint, {
-  SEARCH
-} from 'Endpoints';
+import hnEndpoint, { SEARCH, STORY } from 'Endpoints';
 
+async function fetchSearchStories(hits) {
+  const promises = hits.map(hit => hnEndpoint(STORY, hit.objectID));
+  const results = await Promise.all(promises);
+
+  return results;
+}
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -40,8 +44,10 @@ const useHNsearch = () => {
 
       const results = await hnEndpoint(SEARCH, query);
       if (results.error) dispatch({ type: 'FETCH_FAILURE' });
-
-      dispatch({ type: 'FETCH_SUCCESS', payload: results.hits });
+      else {
+        const payload = await fetchSearchStories(results.hits);
+        dispatch({ type: 'FETCH_SUCCESS', payload });
+      }
     };
 
     fetchData();
@@ -52,6 +58,5 @@ const useHNsearch = () => {
     performSearch: _query => setQuery(_query)
   };
 };
-
 
 export default useHNsearch;

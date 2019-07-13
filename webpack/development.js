@@ -7,7 +7,6 @@ const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-
 module.exports = {
   mode: 'development',
   devtool: 'eval-source-map',
@@ -17,7 +16,7 @@ module.exports = {
     host,
     port,
 
-    open: false,                  // Open the page in browser
+    open: false, // Open the page in browser
     contentBase: contentBasePath, // Content not from webpack is served from here
 
     historyApiFallback: true,
@@ -94,8 +93,7 @@ module.exports = {
               modules: {
                 mode: 'local',
                 // localIdentName: '[folder]__[local]--[hash:base64:10]',
-                // localIdentName: '[path][name]__[local]--[hash:base64:5]',
-                localIdentName: '[local]',
+                localIdentName: '[path][name]__[local]--[hash:base64:5]',
                 context: path.resolve(__dirname, 'src'),
                 hashPrefix: 'custom-hash'
                 // getLocalIdent: https://github.com/webpack-contrib/css-loader#getlocalident
@@ -124,17 +122,17 @@ module.exports = {
   optimization: {
     namedModules: true,
     namedChunks: true,
-    nodeEnv: 'development',       // sets `process.env.NODE_ENV`in the app
+    nodeEnv: 'development', // sets `process.env.NODE_ENV`in the app
     flagIncludedChunks: false,
     occurrenceOrder: false,
-    sideEffects: false,           // https://github.com/webpack/webpack/blob/master/examples/side-effects/README.md
+    sideEffects: false, // https://github.com/webpack/webpack/blob/master/examples/side-effects/README.md
 
     providedExports: false,
     usedExports: false,
     concatenateModules: false,
 
     noEmitOnErrors: true,
-    minimize: false,             // Tell webpack to minimize the bundle using the TerserPlugin.
+    minimize: false, // Tell webpack to minimize the bundle using the TerserPlugin.
     checkWasmTypes: false,
 
     splitChunks: {
@@ -156,7 +154,8 @@ module.exports = {
       meta: {
         charset: 'utf-8',
         viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
-        ['My App']: 'Barebones foundation to quickly start building your web applications'
+        ['My App']:
+          'Barebones foundation to quickly start building your web applications'
       },
       inject: true,
       hash: true,

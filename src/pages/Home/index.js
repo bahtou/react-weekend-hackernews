@@ -7,10 +7,12 @@ import HX from 'Elements/HX';
 
 import { header } from './styles.css';
 
-
 async function fetchStory(articleId) {
   try {
-    const response = await fetch(`https://hacker-news.firebaseio.com/v0/item/${articleId}.json?print=pretty`, { method: 'GET', mode: 'cors' });
+    const response = await fetch(
+      `https://hacker-news.firebaseio.com/v0/item/${articleId}.json?print=pretty`,
+      { method: 'GET', mode: 'cors' }
+    );
     const results = await response.json();
     return results;
   } catch (error) {
@@ -20,7 +22,10 @@ async function fetchStory(articleId) {
 
 async function fetchStories() {
   try {
-    const response = await fetch('https://hacker-news.firebaseio.com/v0/topstories.json', { method: 'GET', mode: 'cors' });
+    const response = await fetch(
+      'https://hacker-news.firebaseio.com/v0/topstories.json',
+      { method: 'GET', mode: 'cors' }
+    );
     const results = await response.json();
     return results;
   } catch (error) {
@@ -66,26 +71,31 @@ function Home({ history }) {
     <MainGridLayout>
       <HeaderGrid>
         <header className={header}>
-          <ReactWeekend />
+          <ReactWeekend fetchStories={fetchStories} />
           <HX hx={'h1'}>Weekend Tech News</HX>
         </header>
       </HeaderGrid>
 
       <ContentGrid>
-        {isError
-          ? <div>Something went wrong...</div>
-          : isLoading
-            ? <div>...Loading...</div>
-            : (
-              <ul>
-                {stories.map((story, index) => <Story key={story.id} index={index} story={story} history={history} />)}
-              </ul>
-            )
-      }
+        {isError ? (
+          <div>Something went wrong...</div>
+        ) : isLoading ? (
+          <div>...Loading...</div>
+        ) : (
+          <ul>
+            {stories.map((story, index) => (
+              <Story
+                key={story.id}
+                index={index}
+                story={story}
+                history={history}
+              />
+            ))}
+          </ul>
+        )}
       </ContentGrid>
     </MainGridLayout>
   );
 }
-
 
 export default Home;
