@@ -26,21 +26,6 @@ function TopDomains() {
     }
   }, [domains]);
 
-  return domains;
-}
-
-function TopDomains() {
-  const [domains, setDomains] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const results = await fetchTopDomains();
-      setDomains(results);
-    };
-
-    fetchData();
-  }, []);
-
   return (
     <MainGridLayout>
       <HeaderGrid>
