@@ -65,9 +65,13 @@
     "@hot-loader/react-dom": "^16.8.6",
     "core-js": "^3.1.4",
     "date-fns": "^1.30.1",
+    "immer": "^3.1.3",
     "react": "^16.8.6",
     "react-hot-loader": "^4.12.5",
-    "react-router-dom": "^5.0.1"
+    "react-redux": "^7.1.0",
+    "react-router-dom": "^5.0.1",
+    "redux": "^4.0.4",
+    "redux-saga": "^1.0.5"
   },
   "scripts": {
     "build": "npm install && npm run clean && webpack --config ./webpack/index.js --env production",

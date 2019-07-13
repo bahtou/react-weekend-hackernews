@@ -16,8 +16,8 @@
   },
 
   "rules": {
-    "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
-    "react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
+    "react-hooks/rules-of-hooks": 2, // Checks rules of Hooks
+    "react-hooks/exhaustive-deps": 0, // Checks effect dependencies
 
     "react/jsx-closing-bracket-location": [2, "after-props"],
     "react/jsx-curly-spacing": [2, "never", {"spacing": { "allowMultiline": false, "objectLiterals": "never" }}],
@@ -37,6 +37,24 @@
     "react/jsx-no-bind": [0, { "ignoreRefs": false, "allowArrowFunctions": false, "allowBind": false }],
 
     "no-underscore-dangle": 0,
-    "no-nested-ternary": 0
+    "no-nested-ternary": 0,
+    "max-statements": [2, { "max": 13 }],
+    "no-underscore-dangle": 0,
+    "no-restricted-syntax": [
+      2,
+      {
+        "selector": "ForInStatement",
+        "message": "for..in loops iterate over the entire prototype chain, which is virtually never what you want. Use Object.{keys,values,entries}, and iterate over the resulting array."
+      },
+      {
+        "selector": "LabeledStatement",
+        "message": "Labels are a form of GOTO; using them makes code confusing and hard to maintain and understand."
+      },
+      {
+        "selector": "WithStatement",
+        "message": "`with` is disallowed in strict mode because it makes code impossible to predict and optimize."
+      }
+    ],
+    "no-continue": 0
   }
 }
