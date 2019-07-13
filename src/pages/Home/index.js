@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
 import { MainGridLayout, HeaderGrid, ContentGrid } from 'Layouts';
-import ReactWeekend from 'Components/ReactWeekend';
 import Story from 'Components/Story';
+import TopHeader from 'Components/TopHeader';
 import HX from 'Elements/HX';
-
-import { header } from './styles.css';
 
 
 async function fetchStory(articleId) {
@@ -65,13 +63,14 @@ function Home({ history }) {
   return (
     <MainGridLayout>
       <HeaderGrid>
-        <header className={header}>
-          <ReactWeekend />
+        <TopHeader>
           <HX hx={'h1'}>Weekend Tech News</HX>
-        </header>
+        </TopHeader>
+
       </HeaderGrid>
 
       <ContentGrid>
+        where should i go?
         {isError
           ? <div>Something went wrong...</div>
           : isLoading

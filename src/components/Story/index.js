@@ -36,7 +36,6 @@ function Story({ index, story, history }) {
       </div>
       <div className={articleMeta}>
         <HX hx={'h1'} className={articleTitle}>{title}</HX>
-
         <span className={articleUrl}>{url}</span>
 
         <footer>

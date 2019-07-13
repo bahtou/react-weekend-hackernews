@@ -2,17 +2,6 @@
 @import '~Styles/variables.scss';
 
 
-.container {
-  display: flex;
-  height: 40px;
-
-  border: 1px solid #DFE1E5;
-  border-radius: 20px;
-  background: #ffffff;
-
-  margin-left: 12px;
-}
-
 .barContainer {
   position: relative;
   flex: 1;
@@ -59,7 +48,6 @@
   align-items: stretch;
   margin: -7px 0;
 }
-
 .theXButton {
   flex: 1;
   display: none;
@@ -89,17 +77,4 @@
   background-color: black;
   outline: none;
   cursor: pointer;
-}
-
-@media only screen and (min-width : 376px) {
-  .container {
-    margin-left: auto;
-  }
-}
-
-@media only screen and (min-width : 505px) {
-  .container {
-    width: 100%;
-    margin-left: 60px;
-  }
 }

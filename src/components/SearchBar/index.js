@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { Search as SearchIcon } from 'Elements/Icons';
 import {
-  container, barContainer, searchBar,
+  barContainer, searchBar,
   searchInput, theXButton, theXBox,
   theX, searchButton
 } from './styles.scss';
@@ -52,7 +52,7 @@ function SearchBar({ performSearch }) {
   }
 
   return (
-    <div className={container}>
+    <>
       <div className={barContainer}>
         <div className={searchBar}>
           <input className={searchInput} type="search" name="q" value={searchTerm}
@@ -78,7 +78,7 @@ function SearchBar({ performSearch }) {
         onClick={handleOnClick}>
         <SearchIcon />
       </button>
-    </div>
+    </>
   );
 }
 

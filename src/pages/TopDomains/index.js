@@ -4,9 +4,10 @@ import { getTopDomainsFromStories } from 'Utils';
 import { MainGridLayout, HeaderGrid, ContentGrid } from 'Layouts';
 import ReactWeekend from 'Components/ReactWeekend';
 import DomainTable from 'Components/DomainTable';
+import TopHeader from 'Components/TopHeader';
 import Button from 'Elements/Button';
 
-import { header, actionButtons } from './styles.scss';
+import { pushLeft, actionButtons } from './styles.scss';
 
 
 async function fetchStory(articleId) {
@@ -50,13 +51,12 @@ function TopDomains() {
   return (
     <MainGridLayout>
       <HeaderGrid>
-        <header className={header}>
-          <ReactWeekend />
+        <TopHeader className={pushLeft}>
           <div className={actionButtons}>
             <Button onClick={() => console.log('top stories')}>Top Stories</Button>
             <Button onClick={() => console.log('best stories')}>Best Stories</Button>
           </div>
-        </header>
+        </TopHeader>
       </HeaderGrid>
 
       <ContentGrid>

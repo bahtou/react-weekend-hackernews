@@ -3,11 +3,11 @@ import React from 'react';
 import { useHNsearch } from 'Hooks';
 
 import { MainGridLayout, HeaderGrid, ContentGrid } from 'Layouts';
-import ReactWeekend from 'Components/ReactWeekend';
 import SearchBar from 'Components/SearchBar';
 import Story from 'Components/Story';
+import TopHeader from 'Components/TopHeader';
 
-import { header, logo } from './styles.css';
+import { container } from './styles.css';
 
 
 function Search({ history }) {
@@ -16,12 +16,9 @@ function Search({ history }) {
   return (
     <MainGridLayout>
       <HeaderGrid>
-        <header className={header}>
-          <div className={logo}>
-            <ReactWeekend />
-          </div>
+        <TopHeader className={container}>
           <SearchBar performSearch={performSearch} />
-        </header>
+        </TopHeader>
       </HeaderGrid>
 
       <ContentGrid>
