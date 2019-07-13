@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 import { getTopDomainsFromStories } from 'Utils';
 import { MainGridLayout, HeaderGrid, ContentGrid } from 'Layouts';
-import ReactWeekend from 'Components/ReactWeekend';
 import DomainTable from 'Components/DomainTable';
 import TopHeader from 'Components/TopHeader';
 import Button from 'Elements/Button';

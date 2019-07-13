@@ -3,11 +3,9 @@ import React from 'react';
 import { useHNcomments } from 'Hooks';
 
 import { MainGridLayout, HeaderGrid, ContentGrid } from 'Layouts';
-import ReactWeekend from 'Components/ReactWeekend';
 import Comments from 'Components/Comments';
+import TopHeader from 'Components/TopHeader';
 import HX from 'Elements/HX';
-
-import { header } from './styles.css';
 
 
 function StoryComments({ location: { state }, history }) {
@@ -17,10 +15,9 @@ function StoryComments({ location: { state }, history }) {
   return (
     <MainGridLayout>
       <HeaderGrid>
-        <header className={header}>
-          <ReactWeekend />
+        <TopHeader>
           <HX hx={'h1'}>Weekend Tech News</HX>
-        </header>
+        </TopHeader>
       </HeaderGrid>
 
       <ContentGrid>

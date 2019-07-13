@@ -66,11 +66,9 @@ function Home({ history }) {
         <TopHeader>
           <HX hx={'h1'}>Weekend Tech News</HX>
         </TopHeader>
-
       </HeaderGrid>
 
       <ContentGrid>
-        where should i go?
         {isError
           ? <div>Something went wrong...</div>
           : isLoading
