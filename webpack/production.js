@@ -9,6 +9,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 
 module.exports = {
@@ -115,6 +116,10 @@ module.exports = {
   },
 
   plugins: [
+    new CopyPlugin([
+      { from: '../_redirects', to: '../build' }
+    ]),
+
     new CompressionPlugin({
       filename: '[path].gz[query]',
       algorithm: 'gzip',
