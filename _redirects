@@ -1,4 +1,2 @@
-# Redirects from what the browser requests to what we serve
-/top-domains              /top-domains
-/search                   /search
-/comments?id=:id          /comments?id=:id
+# https://www.netlify.com/docs/redirects/#history-pushstate-and-single-page-apps
+/*    /index.html   200
