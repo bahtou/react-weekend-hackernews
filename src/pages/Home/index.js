@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import { MainGridLayout, HeaderGrid, ContentGrid } from 'Layouts';
+import { MainGridLayout, NavGrid, HeaderGrid, ContentGrid } from 'Layouts';
 import Story from 'Components/Story';
 import TopHeader from 'Components/TopHeader';
 import HX from 'Elements/HX';
@@ -67,6 +68,12 @@ function Home({ history }) {
           <HX hx={'h1'}>Weekend Tech News</HX>
         </TopHeader>
       </HeaderGrid>
+
+      <NavGrid>
+        <Link to={`/`}>Home</Link>
+        <Link to={`/top-domains`}>Top Domains</Link>
+        <Link to={`/search`}>Search</Link>
+      </NavGrid>
 
       <ContentGrid>
         {isError

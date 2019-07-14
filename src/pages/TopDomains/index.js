@@ -37,6 +37,12 @@ function TopDomains() {
         </TopHeader>
       </HeaderGrid>
 
+      <NavGrid>
+        <Link to={`/`}>Home</Link>
+        <Link to={`/top-domains`}>Top Domains</Link>
+        <Link to={`/search`}>Search</Link>
+      </NavGrid>
+
       <ContentGrid>
         <DomainTable domains={domains} />
       </ContentGrid>

@@ -21,7 +21,7 @@ function Story({ index, story, history }) {
 
   function goToComments() {
     const { location } = history;
-    const pathName = `/comments?${id}`;
+    const pathName = `/comments?id=${id}`;
 
     history.push(pathName, {
       story,
