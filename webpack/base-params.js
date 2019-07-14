@@ -34,21 +34,22 @@ module.exports = {
   imagePathOutput: 'assets/images/[name].[hash:4].[ext]',
 
   jsPaths: [
-    path.resolve(__dirname, '..', `${appRoot}/Root.js`),
-    path.resolve(__dirname, '..', `${appRoot}/piperouter`),
     path.resolve(__dirname, '..', `${appRoot}/components`),
-    path.resolve(__dirname, '..', `${appRoot}/configureStore.js`),
+    path.resolve(__dirname, '..', `${appRoot}/index.js`),
     path.resolve(__dirname, '..', `${appRoot}/elements`),
     path.resolve(__dirname, '..', `${appRoot}/gateway`),
-    path.resolve(__dirname, '..', `${appRoot}/index.js`),
     path.resolve(__dirname, '..', `${appRoot}/layouts`),
     path.resolve(__dirname, '..', `${appRoot}/lib`),
     path.resolve(__dirname, '..', `${appRoot}/logger.js`),
     path.resolve(__dirname, '..', `${appRoot}/pages`),
-    path.resolve(__dirname, '..', `${appRoot}/reducers`),
     path.resolve(__dirname, '..', `${appRoot}/pipeline`),
+    path.resolve(__dirname, '..', `${appRoot}/piperouter`),
+    path.resolve(__dirname, '..', `${appRoot}/reducers`),
+    path.resolve(__dirname, '..', `${appRoot}/Root.js`),
+    path.resolve(__dirname, '..', `${appRoot}/saga`),
     path.resolve(__dirname, '..', `${appRoot}/services`),
-    path.resolve(__dirname, '..', `${appRoot}/shared`)
+    path.resolve(__dirname, '..', `${appRoot}/shared`),
+    path.resolve(__dirname, '..', `${appRoot}/store`)
   ],
 
   logoPath: path.resolve(__dirname, '..', `${appRoot}/assets/images`),
@@ -70,9 +71,10 @@ module.exports = {
     PipeRouter: path.resolve(__dirname, '..', `${appRoot}/piperouter`),
     Pages: path.resolve(__dirname, '..', `${appRoot}/pages`),
     Reducers: path.resolve(__dirname, '..', `${appRoot}/reducers`),
+    Saga: path.resolve(__dirname, '..', `${appRoot}/saga`),
     Services: path.resolve(__dirname, '..', `${appRoot}/services`),
     Shared: path.resolve(__dirname, '..', `${appRoot}/components/shared`),
-    Store: path.resolve(__dirname, '..', `${appRoot}/configureStore.js`),
+    Store: path.resolve(__dirname, '..', `${appRoot}/store`),
     Styles: path.resolve(__dirname, '..', `${appRoot}/assets/styles`),
     Utils: path.resolve(__dirname, '..', `${appRoot}/utils`)
   },

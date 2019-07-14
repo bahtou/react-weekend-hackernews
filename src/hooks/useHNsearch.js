@@ -1,6 +1,7 @@
 import { useState, useEffect, useReducer } from 'react';
 import hnEndpoint, { SEARCH, STORY } from 'Endpoints';
 
+
 async function fetchSearchStories(hits) {
   const promises = hits.map(hit => hnEndpoint(STORY, hit.objectID));
   const results = await Promise.all(promises);
@@ -27,6 +28,13 @@ const reducer = (state, action) => {
       return state;
   }
 };
+
+async function fetchSearchStories(hits) {
+  const promises = hits.map(hit => hnEndpoint(STORY, hit.objectID));
+  const results = await Promise.all(promises);
+
+  return results;
+}
 
 const useHNsearch = () => {
   const [query, setQuery] = useState();

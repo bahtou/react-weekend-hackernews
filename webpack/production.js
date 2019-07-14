@@ -9,6 +9,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 
 module.exports = {
@@ -30,7 +31,7 @@ module.exports = {
                 mode: 'local',
                 // localIdentName: '[folder]__[local]--[hash:base64:10]',
                 // localIdentName: '[path][name]__[local]--[hash:base64:5]',
-                localIdentName: '[local]',
+                localIdentName: '[local]:[hash:base64:5]',
                 context: path.resolve(__dirname, 'src'),
                 hashPrefix: 'custom-hash'
                 // getLocalIdent: https://github.com/webpack-contrib/css-loader#getlocalident
@@ -115,6 +116,10 @@ module.exports = {
   },
 
   plugins: [
+    new CopyPlugin([
+      { from: '../_redirects', to: '../build' }
+    ]),
+
     new CompressionPlugin({
       filename: '[path].gz[query]',
       algorithm: 'gzip',

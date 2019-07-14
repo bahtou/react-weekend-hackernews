@@ -1,63 +1,47 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { getTopDomainsFromStories } from 'Utils';
-import { MainGridLayout, HeaderGrid, ContentGrid } from 'Layouts';
+import { fetchTopDomainsRequested } from 'Saga/topDomains';
+import { TOP_STORIES, BEST_STORIES } from 'Endpoints';
+
+import { MainGridLayout, HeaderGrid, NavGrid, ContentGrid } from 'Layouts';
+
 import ReactWeekend from 'Components/ReactWeekend';
 import DomainTable from 'Components/DomainTable';
+import TopHeader from 'Components/TopHeader';
 import Button from 'Elements/Button';
 
-import { header, actionButtons } from './styles.scss';
+import { pushLeft, actionButtons } from './styles.scss';
 
-
-async function fetchStory(articleId) {
-  const response = await fetch(`https://hacker-news.firebaseio.com/v0/item/${articleId}.json?print=pretty`, { method: 'GET', mode: 'cors' });
-  const results = await response.json();
-
-  return results;
-}
-
-async function fetchStories() {
-  const response = await fetch('https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty', { method: 'GET', mode: 'cors' });
-  const results = await response.json();
-
-  return results;
-}
-
-async function fetchTopDomains() {
-  const _stories = await fetchStories();
-
-  const storyIds = _stories.slice(0, 50);
-  const storyPromises = storyIds.map(storyId => fetchStory(storyId));
-  const stories = await Promise.all(storyPromises);
-
-  const domains = getTopDomainsFromStories(stories);
-
-  return domains;
-}
 
 function TopDomains() {
-  const [domains, setDomains] = useState([]);
+  const domains = useSelector(state => state.TOP_DOMAINS[TOP_STORIES]);
+  const dispatch = useDispatch();
+  const numStories = 100;
 
   useEffect(() => {
-    const fetchData = async () => {
-      const results = await fetchTopDomains();
-      setDomains(results);
-    };
-
-    fetchData();
-  }, []);
+    if (!domains) {
+      dispatch(fetchTopDomainsRequested(TOP_STORIES, numStories));
+    }
+  }, [domains]);
 
   return (
     <MainGridLayout>
       <HeaderGrid>
-        <header className={header}>
-          <ReactWeekend />
+        <TopHeader className={pushLeft}>
           <div className={actionButtons}>
             <Button onClick={() => console.log('top stories')}>Top Stories</Button>
             <Button onClick={() => console.log('best stories')}>Best Stories</Button>
           </div>
-        </header>
+        </TopHeader>
       </HeaderGrid>
+
+      <NavGrid>
+        <Link to={`/`}>Home</Link>
+        <Link to={`/top-domains`}>Top Domains</Link>
+        <Link to={`/search`}>Search</Link>
+      </NavGrid>
 
       <ContentGrid>
         <DomainTable domains={domains} />

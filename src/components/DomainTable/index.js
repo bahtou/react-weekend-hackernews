@@ -7,7 +7,7 @@ import {
 } from './styles.scss';
 
 
-function DomainTable({ domains }) {
+function DomainTable({ domains=[] }) {
   return (
     <>
       <header className={tableHead}>

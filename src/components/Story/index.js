@@ -21,7 +21,7 @@ function Story({ index, story, history }) {
 
   function goToComments() {
     const { location } = history;
-    const pathName = `/comments?${id}`;
+    const pathName = `/comments?id=${id}`;
 
     history.push(pathName, {
       story,
@@ -36,7 +36,6 @@ function Story({ index, story, history }) {
       </div>
       <div className={articleMeta}>
         <HX hx={'h1'} className={articleTitle}>{title}</HX>
-
         <span className={articleUrl}>{url}</span>
 
         <footer>
