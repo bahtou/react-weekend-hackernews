@@ -44,14 +44,14 @@ const useHNstories = (storyCategory, limit = defaultNumStories) => {
   useEffect(() => {
     const fetchData = async () => {
       const storyIds = await hnEndpoint(storyCategory);
-      // if (storyIds.error) return dispatch({ type: 'FETCH_FAILURE' });
+      if (storyIds.error) return dispatch({ type: 'FETCH_FAILURE' });
 
       const limitedStoryIds = storyIds.slice(0, limit);
       const promises = limitedStoryIds.map(storyId => hnEndpoint(STORY, storyId));
       const results = await Promise.all(promises);
 
-      // const someErrors = results.some(result => result.error);
-      // if (someErrors) return dispatch({ type: 'FETCH_FAILURE' });
+      const someErrors = results.some(result => result.error);
+      if (someErrors) return dispatch({ type: 'FETCH_FAILURE' });
 
       reDispatch(setDispatch[storyCategory](results));
       return dispatch({ type: 'FETCH_SUCCESS', payload: results });
@@ -60,7 +60,7 @@ const useHNstories = (storyCategory, limit = defaultNumStories) => {
     if (stories && stories.length === 0) fetchData();
   }, [stories]);
 
-  return { stories };
+  return { ...state, stories };
 };
 
 

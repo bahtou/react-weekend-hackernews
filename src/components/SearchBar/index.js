@@ -15,7 +15,7 @@ function SearchBar({ performSearch }) {
 
   useEffect(() => {
     performSearch(searchTerm);
-  }, [performSearch, searchTerm]);
+  }, []);
 
   function handleOnChange(evt) {
     const { value } = evt.target;

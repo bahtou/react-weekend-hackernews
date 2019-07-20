@@ -5,11 +5,11 @@ import { hot } from 'react-hot-loader/root';
 import React, { lazy, Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
-
 const AsyncHomeComponent = lazy(() => import('Pages/Home'));
 const AsyncTopDomainsComponent = lazy(() => import('Pages/TopDomains'));
 const AsyncSearchComponent = lazy(() => import('Pages/Search'));
 const AsyncStoryCommentsComponent = lazy(() => import('Pages/StoryComments'));
+
 
 const LoadingComponent = () => <h3>please wait...</h3>;
 const Root = () => (

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import webFountainLogo from 'Images/logo.jpg';
 import HX from 'Elements/HX';
@@ -13,7 +14,9 @@ const styles = {
 function ReactWeekend() {
   return (
     <>
-      <img src={webFountainLogo} alt="web-fountain-logo" width="35px" height="39px" />
+      <Link to="/">
+        <img src={webFountainLogo} alt="web-fountain-logo" width="35px" height="39px" />
+      </Link>
       <div className={title}>
         <HX hx={'h2'} style={styles}>React</HX>
         <HX hx={'h2'} style={styles}>Weekend</HX>
