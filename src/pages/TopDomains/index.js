@@ -7,9 +7,9 @@ import { TOP_STORIES, BEST_STORIES } from 'Endpoints';
 
 import { MainGridLayout, HeaderGrid, NavGrid, ContentGrid } from 'Layouts';
 
-import ReactWeekend from 'Components/ReactWeekend';
-import DomainTable from 'Components/DomainTable';
 import TopHeader from 'Components/TopHeader';
+import Navigation from 'Components/Navigation';
+import DomainTable from 'Components/DomainTable';
 import Button from 'Elements/Button';
 
 import { pushLeft, actionButtons } from './styles.scss';
@@ -38,9 +38,7 @@ function TopDomains() {
       </HeaderGrid>
 
       <NavGrid>
-        <Link to={`/`}>Home</Link>
-        <Link to={`/top-domains`}>Top Domains</Link>
-        <Link to={`/search`}>Search</Link>
+        <Navigation />
       </NavGrid>
 
       <ContentGrid>

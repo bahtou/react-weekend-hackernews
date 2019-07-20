@@ -1,0 +1,32 @@
+@import '~Styles/fonts.scss';
+@import '~Styles/variables.scss';
+
+
+.nav {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+
+  li {
+    list-style: none;
+
+    a {
+      text-decoration: none;
+    }
+
+    a:link {
+      color: $black-blue;
+    }
+    a:visited {
+      color: $black-blue;
+    }
+    a:hover {
+      color: $blue;
+    }
+    a:active {
+      color: $light-blue;
+    }
+  }
+}

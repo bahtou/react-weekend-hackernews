@@ -1,7 +1,7 @@
 .mainGridLayout {
   display: grid;
   grid-template-columns: auto [main] minmax(auto, 700px) auto;
-  grid-template-rows: [header] auto 30px [content] auto;
+  grid-template-rows: [header] auto [nav] 50px [content] auto;
 }
 
 .headerGrid {
@@ -11,7 +11,7 @@
 
 .navGrid {
   grid-column: main;
-  grid-row: 2;
+  grid-row: nav;
 }
 
  .contentGrid {
