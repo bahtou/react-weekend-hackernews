@@ -19,12 +19,14 @@ function* fetchHNstories() {
 
     if (stories && stories.length === 0) {
       const storyIds = yield call(hnEndpoint, storyCategory);
+
       const limitedStoryIds = storyIds.slice(0, limit);
       const calls = limitedStoryIds.map(storyId => call(hnEndpoint, STORY, storyId));
 
       stories = yield all(calls);
+      yield put({ type: `SET_${storyCategory}`, payload: stories });
     }
-    console.log(domainCategory);
+
     yield put({
       type: PROCESS_STORIES_RESULTS,
       payload: { domainCategory, stories }
