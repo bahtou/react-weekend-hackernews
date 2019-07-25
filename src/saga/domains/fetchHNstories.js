@@ -6,11 +6,16 @@ import {
   PROCESS_STORIES_RESULTS
 } from './index';
 
+const mapDomains = {
+  BEST_DOMAINS: 'BEST_STORIES',
+  TOP_DOMAINS: 'TOP_STORIES'
+};
 
 function* fetchHNstories() {
   while (true) {
-    const { payload:{ storyCategory, limit }} = yield take(FETCH_HN_STORIES_REQUESTED);
-    let stories = yield select(state => state[storyCategory]);
+    const { payload:{ domainCategory, limit }} = yield take(FETCH_HN_STORIES_REQUESTED);
+    const storyCategory = mapDomains[domainCategory];
+    let stories = yield select(state => state.STORIES[storyCategory]);
 
     if (stories && stories.length === 0) {
       const storyIds = yield call(hnEndpoint, storyCategory);
@@ -19,10 +24,10 @@ function* fetchHNstories() {
 
       stories = yield all(calls);
     }
-
+    console.log(domainCategory);
     yield put({
       type: PROCESS_STORIES_RESULTS,
-      payload: { stories }
+      payload: { domainCategory, stories }
     });
   }
 }

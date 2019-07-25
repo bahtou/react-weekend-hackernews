@@ -1,9 +1,9 @@
 import { all } from 'redux-saga/effects';
-import topDomainsChannel from './topDomains';
+import domainsChannel from './domains';
 
 
 export default function* sagaCoordinator() {
   yield all([
-    topDomainsChannel()
+    domainsChannel()
   ]);
 }

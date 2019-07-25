@@ -1,7 +1,7 @@
 import { put, take } from 'redux-saga/effects';
 import {
   PROCESS_STORIES_RESULTS,
-  STORE_TOP_DOMAIN_STORIES_RESULTS
+  STORE_DOMAIN_RESULTS
 } from './index'
 
 
@@ -49,13 +49,13 @@ function filterTopDomains(topDomains) {
 
 function* processResults() {
   while (true) {
-    const { payload:{ stories }} = yield take(PROCESS_STORIES_RESULTS);
+    const { payload:{ domainCategory, stories }} = yield take(PROCESS_STORIES_RESULTS);
     const topDomains = generateTopDomains(stories);
     const filteredTopDomains = filterTopDomains(topDomains);
 
     yield put({
-      type: STORE_TOP_DOMAIN_STORIES_RESULTS,
-      payload: filteredTopDomains
+      type: STORE_DOMAIN_RESULTS,
+      payload: { domainCategory, filteredTopDomains }
     });
   }
 }

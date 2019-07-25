@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import hnEndpoint, {
   STORY
 } from 'Endpoints';
-import { setBestStories } from 'Reducers/bestStories';
-import { setTopStories } from 'Reducers/topStories';
+import { setBestStories, setTopStories } from 'Reducers/stories';
 
 
 const reducer = (state, action) => {
@@ -33,7 +32,7 @@ const setDispatch = {
 
 const defaultNumStories = 100;
 const useHNstories = (storyCategory, limit = defaultNumStories) => {
-  const stories = useSelector(state => state[storyCategory]);
+  const stories = useSelector(state => state.STORIES[storyCategory]);
   const reDispatch = useDispatch();
   const [state, dispatch] = useReducer(reducer, {
     isLoading: true,

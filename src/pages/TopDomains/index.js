@@ -1,38 +1,38 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchTopDomainsRequested } from 'Saga/topDomains';
-import { TOP_STORIES, BEST_STORIES } from 'Endpoints';
-
 import { MainGridLayout, HeaderGrid, NavGrid, ContentGrid } from 'Layouts';
+import { fetchTopDomainsRequested } from 'Saga/domains';
+import { TOP_DOMAINS, BEST_DOMAINS } from 'Endpoints';
 
 import TopHeader from 'Components/TopHeader';
 import Navigation from 'Components/Navigation';
 import DomainTable from 'Components/DomainTable';
 import Button from 'Elements/Button';
 
-import { pushLeft, actionButtons } from './styles.scss';
+import { active, pushLeft, actionButtons } from './styles.scss';
 
 
 function TopDomains() {
-  const domains = useSelector(state => state.TOP_DOMAINS[TOP_STORIES]);
+  const [domainType, setDomainType] = useState(TOP_DOMAINS);
+  const domains = useSelector(state => state.DOMAINS[domainType]);
   const dispatch = useDispatch();
-  const numStories = 100;
 
   useEffect(() => {
-    if (!domains) {
-      dispatch(fetchTopDomainsRequested(TOP_STORIES, numStories));
-    }
-  }, [domains]);
+    const numStories = 100;
+
+    if (domains.length) return;
+    dispatch(fetchTopDomainsRequested(domainType, numStories));
+
+  }, [domainType]);
 
   return (
     <MainGridLayout>
       <HeaderGrid>
         <TopHeader className={pushLeft}>
           <div className={actionButtons}>
-            <Button onClick={() => console.log('top stories')}>Top Stories</Button>
-            <Button onClick={() => console.log('best stories')}>Best Stories</Button>
+            <Button className={domainType === TOP_DOMAINS ? `${active}`: ''} onClick={() => setDomainType(TOP_DOMAINS)}>Top Stories</Button>
+            <Button className={domainType === BEST_DOMAINS ? `${active}`: ''} onClick={() => setDomainType(BEST_DOMAINS)}>Best Stores</Button>
           </div>
         </TopHeader>
       </HeaderGrid>

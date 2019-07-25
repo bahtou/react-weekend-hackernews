@@ -1,14 +1,12 @@
 import { combineReducers } from 'redux';
 
-import bestStories from './bestStories';
-import topStories from './topStories';
-import topDomains from './topDomains';
+import stories from './stories';
+import domains from './domains';
 
 
 const rootReducer = combineReducers({
-  BEST_STORIES: bestStories,
-  TOP_STORIES: topStories,
-  TOP_DOMAINS: topDomains
+  STORIES: stories,
+  DOMAINS: domains
 });
 
 

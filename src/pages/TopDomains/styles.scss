@@ -9,11 +9,16 @@
     @include bold;
     font-size: 16px;
     background-color: transparent;
+    color: $medium-blue;
     border: none;
     cursor: pointer;
   }
   button:first-child {
     margin-right: 10px;
+  }
+  button.active {
+    color: $black-blue;
+    cursor: unset;
   }
 }
 
