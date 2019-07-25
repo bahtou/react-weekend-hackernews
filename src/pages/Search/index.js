@@ -17,7 +17,7 @@ function Search({ history }) {
     <MainGridLayout>
       <HeaderGrid>
         <TopHeader className={container}>
-            <SearchBar performSearch={performSearch} />j
+            <SearchBar performSearch={performSearch} />
         </TopHeader>
       </HeaderGrid>
 

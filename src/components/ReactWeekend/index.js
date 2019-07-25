@@ -16,11 +16,11 @@ function ReactWeekend() {
     <>
       <Link to="/">
         <img src={webFountainLogo} alt="web-fountain-logo" width="35px" height="39px" />
+        <div className={title}>
+          <HX hx={'h2'} style={styles}>React</HX>
+          <HX hx={'h2'} style={styles}>Weekend</HX>
+        </div>
       </Link>
-      <div className={title}>
-        <HX hx={'h2'} style={styles}>React</HX>
-        <HX hx={'h2'} style={styles}>Weekend</HX>
-      </div>
     </>
   );
 }
