@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
 
 import { MainGridLayout, HeaderGrid, NavGrid, ContentGrid } from 'Layouts';
-import { fetchTopDomainsRequested } from 'Saga/domains';
 import { TOP_DOMAINS, BEST_DOMAINS } from 'Endpoints';
 
 import TopHeader from 'Components/TopHeader';
@@ -11,20 +9,12 @@ import DomainTable from 'Components/DomainTable';
 import Button from 'Elements/Button';
 
 import { active, pushLeft, actionButtons } from './styles.scss';
+import { useFetchDomains } from 'Hooks';
 
 
 function TopDomains() {
   const [domainType, setDomainType] = useState(TOP_DOMAINS);
-  const domains = useSelector(state => state.DOMAINS[domainType]);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const numStories = 100;
-
-    if (domains.length) return;
-    dispatch(fetchTopDomainsRequested(domainType, numStories));
-
-  }, [domainType]);
+  const domains = useFetchDomains(domainType);
 
   return (
     <MainGridLayout>
