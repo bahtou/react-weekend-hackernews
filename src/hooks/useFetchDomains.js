@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchTopDomainsRequested } from 'Saga/domains';
+import { getTopDomainsRequested } from 'Sagas/domains';
 
 
 function useFetchDomains(domainType) {
@@ -8,7 +8,7 @@ function useFetchDomains(domainType) {
 
   if (!domains.length) {
     const numStories = 100;
-    dispatch(fetchTopDomainsRequested(domainType, numStories));
+    dispatch(getTopDomainsRequested(domainType, numStories));
   }
 
   return domains;

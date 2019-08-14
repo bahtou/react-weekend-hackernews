@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
+import { getTopDomainsRequested } from 'Sagas/domains';
 import { MainGridLayout, HeaderGrid, NavGrid, ContentGrid } from 'Layouts';
 import { TOP_DOMAINS, BEST_DOMAINS } from 'Endpoints';
 
@@ -9,12 +11,16 @@ import DomainTable from 'Components/DomainTable';
 import Button from 'Elements/Button';
 
 import { active, pushLeft, actionButtons } from './styles.scss';
-import { useFetchDomains } from 'Hooks';
 
 
 function TopDomains() {
   const [domainType, setDomainType] = useState(TOP_DOMAINS);
-  const domains = useFetchDomains(domainType);
+  const domains = useSelector(state => state.DOMAINS[domainType]);
+  const dispatch = useDispatch();
+
+  if (!domains.length) {
+    dispatch(getTopDomainsRequested(domainType));
+  }
 
   return (
     <MainGridLayout>

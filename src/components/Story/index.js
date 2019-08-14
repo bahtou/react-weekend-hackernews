@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import HX from 'Elements/HX';
 import {
@@ -32,7 +31,7 @@ function Story({ index, story, history }) {
 
   if (!url) return null;
 
-  const truncatedURl = new URL(url).origin
+  const truncatedURl = new URL(url).origin;
 
   return (
     <li id={id} className={article}>

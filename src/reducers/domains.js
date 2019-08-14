@@ -6,6 +6,7 @@ export const BEST_DOMAINS = 'BEST_DOMAINS';
 export const SET_TOP_DOMAINS = 'SET_TOP_DOMAINS';
 export const SET_BEST_DOMAINS = 'SET_BEST_DOMAINS';
 
+// ACTION CREATORS
 export const setBestDomains = domains => {
   return {
     type: SET_BEST_DOMAINS,
@@ -21,11 +22,14 @@ export const setTopDomains = domains => {
 };
 
 
+// DEFAULT STATE
 const initialState = {
   [TOP_DOMAINS]: [],
   [BEST_DOMAINS]: []
 };
 
+
+// ACTION HANDLERS
 const actionHandlers = {
   [SET_TOP_DOMAINS](state, action) {
     return {

@@ -12,6 +12,9 @@
   align-items: center;
 }
 
-.otherContainer {
-  margin: 0 auto;
+.content {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
 }

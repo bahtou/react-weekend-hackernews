@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactWeekend from 'Components/ReactWeekend';
 
-import { header, logo, otherContainer } from './styles.scss';
+import { header, logo, content } from './styles.scss';
 
 
 function TopHeader({ children, className='', style={} }) {
@@ -10,7 +10,7 @@ function TopHeader({ children, className='', style={} }) {
       <div className={logo}>
         <ReactWeekend />
       </div>
-      <div className={`${otherContainer} ${className}`}>
+      <div className={`${content} ${className}`}>
         {children}
       </div>
     </header>

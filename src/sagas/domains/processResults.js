@@ -1,12 +1,8 @@
-import { put, take } from 'redux-saga/effects';
-import {
-  PROCESS_STORIES_RESULTS,
-  STORE_DOMAIN_RESULTS
-} from './index'
+import { take } from 'redux-saga/effects';
+import { PROCESS_STORIES_RESULTS } from './index';
 
 
 const numTopDomains = 20;
-
 function generateTopDomains(stories) {
   const topDomains = {};
 
@@ -49,14 +45,14 @@ function filterTopDomains(topDomains) {
 
 function* processResults() {
   while (true) {
-    const { payload:{ domainCategory, stories }} = yield take(PROCESS_STORIES_RESULTS);
+    const { ctx, next } = yield take(PROCESS_STORIES_RESULTS);
+    const { stories } = ctx.state;
+
     const topDomains = generateTopDomains(stories);
     const filteredTopDomains = filterTopDomains(topDomains);
 
-    yield put({
-      type: STORE_DOMAIN_RESULTS,
-      payload: { domainCategory, filteredTopDomains }
-    });
+    ctx.state = { ...ctx.state, filteredTopDomains };
+    yield next();
   }
 }
 

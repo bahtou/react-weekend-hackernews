@@ -42,9 +42,3 @@ const actionHandlers = {
 
 
 export default createReducer(initialState, actionHandlers);
-
-
-// Selector
-export const getStoryDomains = (state, storyType) => {
-  return state[storyType]
-}
