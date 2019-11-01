@@ -1,20 +1,20 @@
-.mainGridLayout {
+.mainLayout {
   display: grid;
   grid-template-columns: auto [main] minmax(auto, 700px) auto;
   grid-template-rows: [header] auto [nav] 50px [content] auto;
 }
 
-.headerGrid {
+.topHeaderLayout {
   grid-column: main;
   grid-row: header;
 }
 
-.navGrid {
+.navLayout {
   grid-column: main;
   grid-row: nav;
 }
 
- .contentGrid {
+ .contentLayout {
   grid-column: main;
   grid-row: content;
   padding-bottom: 3.0em;

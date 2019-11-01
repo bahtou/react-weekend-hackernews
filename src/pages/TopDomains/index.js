@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { getTopDomainsRequested } from 'Sagas/domains';
-import { MainGridLayout, HeaderGrid, NavGrid, ContentGrid } from 'Layouts';
+import { mainLayout, navLayout, contentLayout } from 'PageLayouts/styles.css';
 import { TOP_DOMAINS, BEST_DOMAINS } from 'Endpoints';
 
-import TopHeader from 'Components/TopHeader';
+import TopHeaderLayout from 'PageLayouts/TopHeaderLayout';
 import Navigation from 'Components/Navigation';
 import DomainTable from 'Components/DomainTable';
 import Button from 'Elements/Button';
@@ -23,24 +23,22 @@ function TopDomains() {
   }
 
   return (
-    <MainGridLayout>
-      <HeaderGrid>
-        <TopHeader className={pushLeft}>
-          <div className={actionButtons}>
-            <Button className={domainType === TOP_DOMAINS ? `${active}`: ''} onClick={() => setDomainType(TOP_DOMAINS)}>Top Stories</Button>
-            <Button className={domainType === BEST_DOMAINS ? `${active}`: ''} onClick={() => setDomainType(BEST_DOMAINS)}>Best Stores</Button>
-          </div>
-        </TopHeader>
-      </HeaderGrid>
+    <div className={mainLayout}>
+      <TopHeaderLayout className={pushLeft}>
+        <div className={actionButtons}>
+          <Button className={domainType === TOP_DOMAINS ? `${active}`: ''} onClick={() => setDomainType(TOP_DOMAINS)}>Top Stories</Button>
+          <Button className={domainType === BEST_DOMAINS ? `${active}`: ''} onClick={() => setDomainType(BEST_DOMAINS)}>Best Stores</Button>
+        </div>
+      </TopHeaderLayout>
 
-      <NavGrid>
+      <div className={navLayout}>
         <Navigation />
-      </NavGrid>
+      </div>
 
-      <ContentGrid>
+      <div className={contentLayout}>
         <DomainTable domains={domains} />
-      </ContentGrid>
-    </MainGridLayout>
+      </div>
+    </div>
   );
 }
 

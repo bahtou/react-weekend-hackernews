@@ -1,8 +1,8 @@
 import React from 'react';
 import { useHNcomments } from 'Hooks';
 
-import { MainGridLayout, HeaderGrid, NavGrid, ContentGrid } from 'Layouts';
-import TopHeader from 'Components/TopHeader';
+import { mainLayout, navLayout, contentLayout } from 'PageLayouts/styles.css';
+import TopHeaderLayout from 'PageLayouts/TopHeaderLayout';
 import Navigation from 'Components/Navigation';
 import Comments from 'Components/Comments';
 import HX from 'Elements/HX';
@@ -13,24 +13,22 @@ function StoryComments({ location: { state }, history }) {
   const { comments } = useHNcomments(story.kids);
 
   return (
-    <MainGridLayout>
-      <HeaderGrid>
-        <TopHeader>
-          <HX hx={'h1'}>Weekend Tech News</HX>
-        </TopHeader>
-      </HeaderGrid>
+    <div className={mainLayout}>
+      <TopHeaderLayout>
+        <HX hx={'h1'}>Weekend Tech News</HX>
+      </TopHeaderLayout>
 
-      <NavGrid>
+      <div className={navLayout}>
         <Navigation />
-      </NavGrid>
+      </div>
 
-      <ContentGrid>
+      <div className={contentLayout}>
         {comments.length > 0
           ? <Comments story={story} comments={comments} history={history} />
           : null
         }
-      </ContentGrid>
-    </MainGridLayout>
+      </div>
+    </div>
   );
 }
 

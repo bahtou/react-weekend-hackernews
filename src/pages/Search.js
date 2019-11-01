@@ -1,38 +1,34 @@
 import React from 'react';
 import { useHNsearch } from 'Hooks';
 
-import { MainGridLayout, NavGrid, HeaderGrid, ContentGrid } from 'Layouts';
-import TopHeader from 'Components/TopHeader';
+import { mainLayout, navLayout, contentLayout } from 'PageLayouts/styles.css';
+import TopHeaderLayout from 'PageLayouts/TopHeaderLayout';
 import Navigation from 'Components/Navigation';
 import SearchBar from 'Components/SearchBar';
 import Story from 'Components/Story';
-
-import { container } from './styles.css';
 
 
 function Search({ history }) {
   const { searchResults, performSearch } = useHNsearch();
 
   return (
-    <MainGridLayout>
-      <HeaderGrid>
-        <TopHeader className={container}>
-            <SearchBar performSearch={performSearch} />
-        </TopHeader>
-      </HeaderGrid>
+    <div className={mainLayout}>
+      <TopHeaderLayout>
+        <SearchBar performSearch={performSearch} />
+      </TopHeaderLayout>
 
-      <NavGrid>
+      <div className={navLayout}>
         <Navigation />
-      </NavGrid>
+      </div>
 
-      <ContentGrid>
+      <div className={contentLayout}>
         <ul>
           {searchResults.map((story, index) => (
             <Story key={story.id} index={index} story={story} history={history} />
           ))}
         </ul>
-      </ContentGrid>
-    </MainGridLayout>
+      </div>
+    </div>
 
   );
 }

@@ -2,11 +2,10 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { getStoriesRequested, refreshStoriesRequested } from 'Sagas/stories';
-
 import { TOP_STORIES } from 'Endpoints';
 
-import { MainGridLayout, NavGrid, HeaderGrid, ContentGrid } from 'Layouts';
-import TopHeader from 'Components/TopHeader';
+import { mainLayout, navLayout, contentLayout } from 'PageLayouts/styles.css';
+import TopHeaderLayout from 'PageLayouts/TopHeaderLayout';
 import Navigation from 'Components/Navigation';
 import Story from 'Components/Story';
 import HX from 'Elements/HX';
@@ -27,27 +26,25 @@ function Home({ history }) {
   }
 
   return (
-    <MainGridLayout>
-      <HeaderGrid>
-        <TopHeader>
-          <HX hx={'h1'} style={{ margin: '0 auto' }}>Weekend Tech News</HX>
-          <RefreshIcon
-            title="Refresh Stories"
-            style={{ cursor: 'pointer', width: '15px' }}
-            onClick={() => handleRefresh()} />
-        </TopHeader>
-      </HeaderGrid>
+    <div className={mainLayout}>
+      <TopHeaderLayout>
+        <HX hx={'h1'} style={{ margin: '0 auto' }}>Weekend Tech News</HX>
+        <RefreshIcon
+          title="Refresh Stories"
+          style={{ cursor: 'pointer', width: '15px' }}
+          onClick={() => handleRefresh()} />
+      </TopHeaderLayout>
 
-      <NavGrid>
+      <div className={navLayout}>
         <Navigation />
-      </NavGrid>
+      </div>
 
-      <ContentGrid>
+      <div className={contentLayout}>
         <ul>
           {stories.map((story, index) => <Story key={story.id} index={index} story={story} history={history} />)}
         </ul>
-      </ContentGrid>
-    </MainGridLayout>
+      </div>
+    </div>
   );
 }
 
